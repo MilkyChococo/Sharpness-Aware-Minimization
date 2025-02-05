@@ -6,7 +6,9 @@ On 3 Oct 2020, Sharpness-Aware Minimization ([SAM](https://arxiv.org/abs/2010.01
 
 # Definitions
 
-Sharpness indicates the model's sensitivity to small changes in its parameters (weights). There are two types of Sharpness: Sharp Minimum - A point in the loss function where the loss value changes significantly in response to small variations in the model parameters and Flat Minimum - A point in the loss function where the loss function changes little for small parameter perturbations, leading to a more stable and better-generalizing model. ![Definitions](assets/sharp-flat.png).
+Sharpness indicates the model's sensitivity to small changes in its parameters (weights). There are two types of Sharpness: Sharp Minimum - A point in the loss function where the loss value changes significantly in response to small variations in the model parameters and Flat Minimum - A point in the loss function where the loss function changes little for small parameter perturbations, leading to a more stable and better-generalizing model. 
+
+![Definitions](assets/sharp-flat.png).
 
 Noise refers to the difference between training data and testing data or the sensitivity of parameters to changes. Certainly, we are unaware of the risks associated with testing data, such as unseen data, missing data, etc., which can negatively affect the model's generalization. The main point of SAM is to find the loss-max-function noise to solving **Overfitting** and **Underfitting** problem.
 
@@ -34,7 +36,7 @@ By using SAM, we can identify $` \epsilon `$ such that when added to $` w_{\text
 
 $$\max_{\| \epsilon \|_2 \leq \rho} L_S(w + \epsilon)$$
 
-This optimization step allows us to find the sharpest direction that increases the loss. By then finding the flatter minima from the opposite side of that direction (which helps in reducing loss), SAM helps $` w_{\text{Train}} `$ adapt better to the test dataset, thereby improving generalization performance. ![Overview](assets/sharp-flat.png).
+This optimization step allows us to find the sharpest direction that increases the loss. By then finding the flatter minima from the opposite side of that direction (which helps in reducing loss), SAM helps $` w_{\text{Train}} `$ adapt better to the test dataset, thereby improving generalization performance. !
 
 # How SAM works
 
