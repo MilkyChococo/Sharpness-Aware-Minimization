@@ -162,6 +162,10 @@ $$
 w_{t+1} \leftarrow w_t - \eta \nabla_w L_{\text{SAM}}(w)
 $$
 
+# Overview of SAM Algorithms
+
+![Project Logo](figure2.png)
+
 # SAM Results on Different Datasets
 
 SAM has been tested on datasets like CIFAR-10, Kmnist, and FashionMNIST showing significant improvements.
@@ -173,4 +177,21 @@ SAM has been tested on datasets like CIFAR-10, Kmnist, and FashionMNIST showing 
 | CIFAR-10     | 84                |
 
 
-Based on the knowledge from that paper, we continue learning about variants of SAM that can be applied to solving optimization problems: SSAMF, SSAMD, FriendlySAM, and IMBSAM. The source code is implemented in Python using the PyTorch framework and applied with a multivariable function.
+As we can see, SAM works efficiently on various datasets such. The source code is implemented in Python using the PyTorch framework and we apply SAM with a multivariable function as well. Find out now!
+
+# Conclusion
+
+SAM is an effective approach for improving model generalization by reducing the sharpness of loss minima. The benefits include:
+
+Reduced Sharpness: Mitigates model sensitivity to small
+parameter changes.
+
+Improved Generalization: Enhances model performance on
+unseen data.
+
+Higher Stability: Avoids falling into sharp minima that may
+lead to overfitting.
+
+Easy Integration: SAM can be easily combined with existing
+optimization techniques like SGD or Adam.
+
