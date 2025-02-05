@@ -283,6 +283,40 @@ class SSAMD(SAM):
                 total_num += self.state[p]['mask'].numel()
         return float(live_num) / total_num
 
+def train_with_accuracy(model, optimizer, criterion, dataloader, epochs):
+    losses = []
+    accuracies = []
+
+    for epoch in range(epochs):
+        epoch_loss = 0
+        y_true_all = []
+        y_pred_all = []
+
+        for x_batch, y_batch in dataloader:
+            def closure():
+                optimizer.zero_grad()
+                y_pred = model(x_batch)
+                loss = criterion(y_pred, y_batch)
+                loss.backward()
+                return loss
+ss
+            loss = closure()
+            optimizer.step(closure)
+            epoch_loss += loss.item()
+
+            y_pred = model(x_batch).detach().numpy()
+            y_true = y_batch.numpy()
+            y_pred_all.extend(y_pred)
+            y_true_all.extend(y_true)
+
+        losses.append(epoch_loss / len(dataloader))
+        r2 = r2_score(y_true_all, y_pred_all)
+        accuracies.append(r2)
+
+        print(f"Epoch {epoch + 1}, Loss: {losses[-1]:.4f}, R²: {r2:.4f}")
+
+    return losses, accuracies
+
 
 torch.manual_seed(42)
 input_size = 10
@@ -313,61 +347,5 @@ all_accuracies = {}
 for name, model in models.items():
     print(f"Training {name}...")
     losses, accuracies = train_with_accuracy(model, optimizers[name], criterion, dataloader, epochs)
-    all_losses[name] = losses
-    all_accuracies[name] = accuracies
 
-plt.figure(figsize=(12, 6))
-
-plt.subplot(1, 2, 1)
-for name, losses in all_losses.items():
-    plt.plot(losses, label=name)
-plt.title("Training Loss Comparison")
-plt.xlabel("Epoch")
-plt.ylabel("Loss")
-plt.legend()
-
-plt.subplot(1, 2, 2)
-for name, accuracies in all_accuracies.items():
-    plt.plot(accuracies, label=name)
-plt.title("Training Accuracy (R²) Comparison")
-plt.xlabel("Epoch")
-plt.ylabel("R² Score")
-plt.legend()
-
-plt.tight_layout()
-plt.show()
-print()
-optimizers = ['SSAMF', 'SSAMD']
-final_losses = [all_losses['SSAMF'][epochs-1],all_losses['SSAMD'][epochs-1]]
-final_r2_scores = [all_accuracies['SSAMF'][epochs-1],all_accuracies['SSAMD'][epochs-1]]
-
-x = np.arange(len(optimizers))
-width = 0.35
-
-fig, ax1 = plt.subplots(figsize=(10, 6))
-
-bars1 = ax1.bar(x - width/2, final_losses, width, label='Loss', color='salmon')
-ax1.set_xlabel('Optimizer')
-ax1.set_ylabel('Loss', color='salmon')
-ax1.tick_params(axis='y', labelcolor='salmon')
-ax1.set_xticks(x)
-ax1.set_xticklabels(optimizers)
-
-for bar in bars1:
-    height = bar.get_height()
-    ax1.text(bar.get_x() + bar.get_width()/2, height, f'{height:.4f}', ha='center', va='bottom', color='salmon')
-
-ax2 = ax1.twinx()
-bars2 = ax2.bar(x + width/2, final_r2_scores, width, label='R²', color='lightgreen')
-ax2.set_ylabel('R²', color='lightgreen')
-ax2.tick_params(axis='y', labelcolor='lightgreen')
-ax2.set_ylim(0.98, 1.0)
-
-for bar in bars2:
-    height = bar.get_height()
-    ax2.text(bar.get_x() + bar.get_width()/2, height, f'{height:.4f}', ha='center', va='bottom', color='lightgreen')
-
-plt.title('Comparison of Final Loss and R² Scores Across Optimizers')
-fig.tight_layout()
-plt.show()
 
