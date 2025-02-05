@@ -1,7 +1,8 @@
+    [REPORT]
 # Sharpness-Aware Minimization
 Optimizing model parameters remains a challenging problem for researchers, as it plays a crucial role in enhancing the performance of generative models. Modern deep learning models are often highly overparameterized, capable of memorizing the entire training set. This leads to the problem of overfitting, reducing the model’s generalization capability for unseen data.
 
-On 3 Oct 2020, Sharpness-Aware Minimization (SAM) was first introduced in the paper titled "Sharpness-Aware Minimization for Efficiently Improving Generalization" by Pierre Foret, Ariel Kleiner, Hossein Mobahi, and Behnam Neyshabur. Generally, SAM can optimize the function better than other optimizers in some situations by finding the noise on the training data, which makes the loss function max, plus parameters (weights) that help them adapt better to the changes in testing data. SAM aims to reduce the sharpness of minima to ensure the model is more stable on new data.
+On 3 Oct 2020, Sharpness-Aware Minimization ([SAM](https://arxiv.org/abs/2010.01412)) was first introduced in the paper titled "Sharpness-Aware Minimization for Efficiently Improving Generalization" by Pierre Foret, Ariel Kleiner, Hossein Mobahi, and Behnam Neyshabur. Generally, SAM can optimize the function better than other optimizers in some situations by finding the noise on the training data, which makes the loss function max, plus parameters (weights) that help them adapt better to the changes in testing data. SAM aims to reduce the sharpness of minima to ensure the model is more stable on new data.
 
 # Definitions
 
