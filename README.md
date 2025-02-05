@@ -182,6 +182,8 @@ SAM has been tested on datasets like CIFAR-10, Kmnist, and FashionMNIST showing 
 
 As we can see, SAM works efficiently on various datasets such. The source code is implemented in Python using the PyTorch framework and we apply SAM with a multivariable function as well. Find out now!
 
+![Project Logo](assets/figure1.png)
+
 # Conclusion
 
 SAM is an effective approach for improving model generalization by reducing the sharpness of loss minima. The benefits include:
