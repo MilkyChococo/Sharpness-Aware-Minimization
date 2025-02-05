@@ -167,7 +167,7 @@ $$
 
 # Overview of SAM Algorithms
 
-![Project Logo](figure2.png)
+![Project Logo](assets/figure2.png)
 
 # SAM Results on Different Datasets
 
