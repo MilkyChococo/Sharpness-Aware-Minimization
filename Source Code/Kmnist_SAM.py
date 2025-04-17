@@ -49,10 +49,6 @@ classes = [
 ]
 
 
-
-import torch.nn as nn
-import torch.nn.functional as F
-
 class Model(nn.Module):
     def __init__(self):
         super().__init__()
@@ -129,8 +125,6 @@ for epoch in range(1, n_epochs + 1):
         writer.add_scalar('valid loss',
                           valid_loss,
                           epoch * len(valid_loader))
-
-  ##################Test the effectiveness of the model############
 
 model = Model()
 
