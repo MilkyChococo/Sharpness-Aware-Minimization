@@ -40,9 +40,6 @@ test_loader = torch.utils.data.DataLoader(test_data, batch_size=batch_size,
 classes = ['airplane', 'automobile', 'bird', 'cat', 'deer',
            'dog', 'frog', 'horse', 'ship', 'truck']
 
-
-import torch.nn as nn
-import torch.nn.functional as F
 class Model(nn.Module):
     def __init__(self):
         super().__init__()
@@ -113,23 +110,16 @@ for epoch in range(1, n_epochs + 1):
                           valid_loss,
                           epoch * len(valid_loader))
 
-
-#####Test the effectiveness of the model########
-
 model = Model()
 
 model.load_state_dict(torch.load('model_cifar_SAM.pt'))
 
 if torch.cuda.is_available():
     model.cuda()
-# number of subprocesses to use for data loading
 num_workers = 0
-# how many samples per batch to load
 batch_size = 20
-# percentage of training set to use as validation
 valid_size = 0.2
 
-# convert data to a normalized torch.FloatTensor
 transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
