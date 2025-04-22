@@ -1,4 +1,3 @@
-    [REPORT]
 # Sharpness-Aware Minimization
 Optimizing model parameters remains a challenging problem for researchers, as it plays a crucial role in enhancing the performance of generative models. Modern deep learning models are often highly overparameterized, capable of memorizing the entire training set. This leads to the problem of overfitting, reducing the model’s generalization capability for unseen data.
 
